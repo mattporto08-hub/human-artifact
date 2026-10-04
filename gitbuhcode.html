@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Infographic: The Hidden Footprint of Everyday AI Prompts</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --accent-blue: #38bdf8;
+      --accent-green: #4ade80;
+      --accent-amber: #fbbf24;
+      --muted: #94a3b8;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 2rem 1rem;
+      display: flex;
+      justify-content: center;
+    }
+    .container {
+      max-width: 800px;
+      width: 100%;
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    }
+    h1 {
+      color: var(--accent-blue);
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+    .subtitle {
+      text-align: center;
+      color: var(--muted);
+      margin-bottom: 2rem;
+      font-size: 1rem;
+    }
+    .toggle-container {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .toggle-btn {
+      background: #334155;
+      color: var(--text);
+      border: 2px solid transparent;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .toggle-btn.active {
+      border-color: var(--accent-blue);
+      background: #0284c7;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .metric-card {
+      background: #0f172a;
+      padding: 1.5rem;
+      border-radius: 12px;
+      border-left: 4px solid var(--accent-blue);
+    }
+    .metric-card.alt {
+      border-left-color: var(--accent-amber);
+    }
+    .metric-value {
+      font-size: 2rem;
+      font-weight: bold;
+      color: var(--accent-blue);
+      margin: 0.5rem 0;
+    }
+    .metric-card.alt .metric-value {
+      color: var(--accent-amber);
+    }
+    .metric-title {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+    }
+    .takeaway {
+      background: #1e3a8a33;
+      border: 1px solid #3b82f655;
+      padding: 1.25rem;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+    }
+    .takeaway h3 {
+      margin-top: 0;
+      color: var(--accent-blue);
+    }
+    .sources {
+      font-size: 0.8rem;
+      color: var(--muted);
+      border-top: 1px solid #334155;
+      padding-top: 1rem;
+    }
+    .sources a {
+      color: var(--accent-blue);
+    }
+    @media (max-width: 600px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>The Invisible Friction of Everyday Tech</h1>
+  <p class="subtitle">Comparing Resource Energy & Cognitive Agency Trade-offs in Digital Queries</p>
+
+  <div class="toggle-container">
+    <button class="toggle-btn active" id="btn-search" onclick="switchView('search')">Standard Web Search</button>
+    <button class="toggle-btn" id="btn-ai" onclick="switchView('ai')">Generative AI Query</button>
+  </div>
+
+  <div class="grid">
+    <div class="metric-card">
+      <div class="metric-title">Estimated Energy Usage</div>
+      <div class="metric-value" id="energy-val">0.3 Wh</div>
+      <p id="energy-desc" style="color: var(--muted); font-size: 0.9rem;">Equivalent to lighting a low-watt LED bulb for ~1.8 minutes.</p>
+    </div>
+
+    <div class="metric-card alt">
+      <div class="metric-title">Cognitive Agency Shift</div>
+      <div class="metric-value" id="agency-val">Active Synthesis</div>
+      <p id="agency-desc" style="color: var(--muted); font-size: 0.9rem;">User scans links, evaluates source credibility, and forms conclusions manually.</p>
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <h3 id="takeaway-title">Key Insight: Active Human Curation</h3>
+    <p id="takeaway-text">Standard web search keeps critical evaluation in human hands, but requires higher cognitive effort and time to filter through multiple results.</p>
+  </div>
+
+  <div class="sources">
+    <strong>Sources & References:</strong>
+    <ul>
+      <li>International Energy Agency (IEA) – <em>Electricity 2024 Analysis & Forecast</em></li>
+      <li>MIT Technology Review – <em>The Environmental Footprint of AI Computation</em></li>
+    </ul>
+  </div>
+</div>
+
+<script>
+  function switchView(type) {
+    const btnSearch = document.getElementById('btn-search');
+    const btnAi = document.getElementById('btn-ai');
+    
+    const energyVal = document.getElementById('energy-val');
+    const energyDesc = document.getElementById('energy-desc');
+    
+    const agencyVal = document.getElementById('agency-val');
+    const agencyDesc = document.getElementById('agency-desc');
+    
+    const takeawayTitle = document.getElementById('takeaway-title');
+    const takeawayText = document.getElementById('takeaway-text');
+
+    if (type === 'ai') {
+      btnAi.classList.add('active');
+      btnSearch.classList.remove('active');
+
+      energyVal.innerText = '2.9 Wh (~10x)';
+      energyDesc.innerText = 'Equivalent to powering an LED bulb for nearly 20 minutes per complex query.';
+      
+      agencyVal.innerText = 'Delegated Output';
+      agencyDesc.innerText = 'System synthesizes answer directly; user shifts from investigator to editor or passive consumer.';
+
+      takeawayTitle.innerText = 'Key Insight: Frictionless Convenience vs. Invisible Cost';
+      takeawayText.innerText = 'Generative AI drastically lowers cognitive effort, but trade-offs include higher physical energy consumption and potential erosion of critical evaluation habits.';
+    } else {
+      btnSearch.classList.add('active');
+      btnAi.classList.remove('active');
+
+      energyVal.innerText = '0.3 Wh';
+      energyDesc.innerText = 'Equivalent to lighting a low-watt LED bulb for ~1.8 minutes.';
+
+      agencyVal.innerText = 'Active Synthesis';
+      agencyDesc.innerText = 'User scans links, evaluates source credibility, and forms conclusions manually.';
+
+      takeawayTitle.innerText = 'Key Insight: Active Human Curation';
+      takeawayText.innerText = 'Standard web search keeps critical evaluation in human hands, but requires higher cognitive effort and time to filter through multiple results.';
+    }
+  }
+</script>
+
+</body>
+</html>
